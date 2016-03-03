@@ -13,22 +13,18 @@
 			"type": "Microsoft.Network/networkSecurityGroups/securityRules",
 			"apiVersion": "[variables('apiVersion')]",
 			"location": "[resourceGroup().location]",
-			"properties": {
-				"securityRules": [
-					{
-						"name": "http",
-						"properties": {
-							"protocol": "Tcp",
-							"sourcePortRange": "*",
-							"destinationPortRange": "80",
-							"sourceAddressPrefix": "Internet",
-							"destinationAddressPrefix": "*",
-							"access": "Allow",
-							"priority": 100,
-							"direction": "Inbound"
-						}
-					}
-				]
+			{
+				"name": "http",
+				"properties": {
+					"protocol": "Tcp",
+					"sourcePortRange": "*",
+					"destinationPortRange": "80",
+					"sourceAddressPrefix": "Internet",
+					"destinationAddressPrefix": "*",
+					"access": "Allow",
+					"priority": 100,
+					"direction": "Inbound"
+				}
 			}
 		}
 	],
