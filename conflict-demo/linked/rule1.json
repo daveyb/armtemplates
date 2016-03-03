@@ -12,7 +12,6 @@
 			"name": "[concat(parameters('nsgName'), '/rule1')]",
 			"type": "Microsoft.Network/networkSecurityGroups/securityRules",
 			"apiVersion": "[variables('apiVersion')]",
-			"location": "[resourceGroup().location]",
 			{
 				"name": "http",
 				"properties": {
