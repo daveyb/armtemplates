@@ -5,13 +5,11 @@
 		"nsgName": { "type": "string" }
 	},
 	"variables": {
-		"apiVersion": "[providers('Microsoft.Network', 'networkSecurityGroups').apiVersions[0]]"
 	},
 	"resources": [
 		{
 			"name": "[concat(parameters('nsgName'), '/rule1')]",
-			"type": "Microsoft.Network/networkSecurityGroups/securityRules",
-			"apiVersion": "[variables('apiVersion')]",
+			"type": "Microsoft.Network/networkSecurityGroups/securityRules"
 			{
 				"name": "https",
 				"properties": {
