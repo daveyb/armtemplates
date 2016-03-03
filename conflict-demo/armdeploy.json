@@ -19,14 +19,35 @@
 			"name": "LinkedRule1",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "[variables('deploymentApiVersion')]",
+			"dependsOn": [
+				"[variables('nsgName')]"
+			],
 			"properties": {
 				"mode": "[deployment().properties.mode]",
 				"templateLink": {
-					"uri": "",
+					"uri": "https://raw.githubusercontent.com/daveyb/armtemplates/master/conflict-demo/linked/rule1.json",
 					"contentVersion": "1.0.0.0"
 				},
 				"parameters": {
-					"nsgName": { "value": "[variables('nsgName')" }
+					"nsgName": { "value": "[variables('nsgName')]" }
+				}
+			}
+		},
+		{
+			"name": "LinkedRule2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "[variables('deploymentApiVersion')]",
+			"dependsOn": [
+				"[variables('nsgName')]"
+			],
+			"properties": {
+				"mode": "[deployment().properties.mode]",
+				"templateLink": {
+					"uri": "https://raw.githubusercontent.com/daveyb/armtemplates/master/conflict-demo/linked/rule2.json",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"nsgName": { "value": "[variables('nsgName')]" }
 				}
 			}
 		}
