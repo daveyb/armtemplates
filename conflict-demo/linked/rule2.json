@@ -1,0 +1,37 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"nsgName": { "type": "string" }
+	},
+	"variables": {
+		"apiVersion": "[providers('Microsoft.Network', 'networkSecurityGroups').apiVersions[0]]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('nsgName'), '/rule1')]",
+			"type": "Microsoft.Network/networkSecurityGroups/securityRules",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]",
+			"properties": {
+				"securityRules": [
+					{
+						"name": "https",
+						"properties": {
+							"protocol": "Tcp",
+							"sourcePortRange": "*",
+							"destinationPortRange": "443",
+							"sourceAddressPrefix": "Internet",
+							"destinationAddressPrefix": "*",
+							"access": "Allow",
+							"priority": 101,
+							"direction": "Inbound"
+						}
+					}
+				]
+			}
+		}
+	],
+	"outputs": {
+	}
+}

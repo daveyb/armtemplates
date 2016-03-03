@@ -1,0 +1,36 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+	},
+	"variables": {
+		"apiVersion": "[providers('Microsoft.Network', 'networkSecurityGroups').apiVersions[0]]",
+		"deploymentApiVersion": "[providers('Microsoft.Resources', 'deployments').apiVersions[0]]",
+		"nsgName": "DemoNSGConflict"
+	},
+	"resources": [
+		{
+			"name": "[variables('nsgName')]",
+			"type": "Microsoft.Network/networkSecurityGroups",
+			"apiVersion": "[variables('apiVersion')]",
+			"location": "[resourceGroup().location]"
+		},
+		{
+			"name": "LinkedRule1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "[variables('deploymentApiVersion')]",
+			"properties": {
+				"mode": "[deployment().properties.mode]",
+				"templateLink": {
+					"uri": "",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"nsgName": { "value": "[variables('nsgName')" }
+				}
+			}
+		}
+	],
+	"outputs": {
+	}
+}
