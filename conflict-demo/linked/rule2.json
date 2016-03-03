@@ -5,26 +5,25 @@
 		"nsgName": { "type": "string" }
 	},
 	"variables": {
+		"apiVersion": "[providers('Microsoft.Network', 'networkSecurityGroups').apiVersions[0]]"
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('nsgName'), '/rule1')]",
-			"type": "Microsoft.Network/networkSecurityGroups/securityRules"
-			{
-				"name": "https",
-				"properties": {
-					"protocol": "Tcp",
-					"sourcePortRange": "*",
-					"destinationPortRange": "443",
-					"sourceAddressPrefix": "Internet",
-					"destinationAddressPrefix": "*",
-					"access": "Allow",
-					"priority": 101,
-					"direction": "Inbound"
-				}
+			"name": "[concat(parameters('nsgName'), '/rule2')]",
+			"type": "Microsoft.Network/networkSecurityGroups/securityRules",
+			"location": "[resourceGroup().location]",
+			"apiVersion": "[variables('apiVersion')]",
+			"properties": {
+				"protocol": "Tcp",
+				"sourcePortRange": "*",
+				"destinationPortRange": "443",
+				"sourceAddressPrefix": "Internet",
+				"destinationAddressPrefix": "*",
+				"access": "Allow",
+				"priority": 101,
+				"direction": "Inbound"
 			}
 		}
-}
 	],
 	"outputs": {
 	}
