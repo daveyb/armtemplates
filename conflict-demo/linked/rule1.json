@@ -13,9 +13,6 @@
 			"type": "Microsoft.Network/networkSecurityGroups/securityRules",
 			"location": "[resourceGroup().location]",
 			"apiVersion": "[variables('apiVersion')]",
-			"dependsOn": [
-				"[parameters('nsgName')]"
-			],
 			"properties": {
 				"protocol": "Tcp",
 				"sourcePortRange": "*",
